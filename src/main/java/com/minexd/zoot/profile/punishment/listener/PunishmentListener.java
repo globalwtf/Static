@@ -1,0 +1,63 @@
+package com.minexd.zoot.profile.punishment.listener;
+
+import com.minexd.zoot.profile.punishment.procedure.PunishmentProcedure;
+import com.minexd.zoot.profile.punishment.procedure.PunishmentProcedureStage;
+import com.minexd.zoot.profile.punishment.procedure.PunishmentProcedureType;
+import com.minexd.zoot.util.CC;
+import net.frozenorb.qlib.menu.menus.ConfirmMenu;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
+public class PunishmentListener implements Listener {
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onAsyncPlayerChatEvent(AsyncPlayerChatEvent event) {
+        if (!event.getPlayer().hasPermission("zoot.staff.grant")) {
+            return;
+        }
+
+        PunishmentProcedure procedure = PunishmentProcedure.getByPlayer(event.getPlayer());
+
+        if (procedure != null && procedure.getStage() == PunishmentProcedureStage.REQUIRE_TEXT) {
+            event.setCancelled(true);
+
+            if (event.getMessage().equalsIgnoreCase("cancel")) {
+                PunishmentProcedure.getProcedures().remove(procedure);
+                event.getPlayer().sendMessage(CC.RED + "You have cancelled the punishment procedure.");
+                return;
+            }
+
+            if (procedure.getType() == PunishmentProcedureType.PARDON) {
+                AtomicBoolean removed = new AtomicBoolean(false);
+
+                new ConfirmMenu(CC.YELLOW + "Pardon this punishment?", data -> {
+                    if (data) {
+                        procedure.getPunishment().setRemovedBy(event.getPlayer().getUniqueId());
+                        procedure.getPunishment().setRemovedAt(System.currentTimeMillis());
+                        procedure.getPunishment().setRemovedReason(event.getMessage());
+                        procedure.getPunishment().setRemoved(true);
+                        procedure.finish();
+
+                        event.getPlayer().sendMessage(CC.GREEN + "The punishment has been removed.");
+
+                        removed.set(true);
+                    }
+                }) {
+                    @Override
+                    public void onClose(Player player) {
+                        if (!removed.get()) {
+                            procedure.cancel();
+                            event.getPlayer().sendMessage(CC.RED + "You did not confirm to pardon the punishment.");
+                        }
+                    }
+                }.openMenu(event.getPlayer());
+            }
+        }
+    }
+
+}
