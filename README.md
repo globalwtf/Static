@@ -26,3 +26,4 @@ An essential server management plugin for all servers.
 - static.staff.mutechat
 - static.admin.rank
 
+# Not everything uploaded!
