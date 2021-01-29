@@ -1,0 +1,2 @@
+# Static
+HCStatic Rank Core
