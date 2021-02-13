@@ -1,0 +1,6 @@
+main: com.minexd.zoot.Zoot
+name: Static
+author: HCstatic Development Team
+version: 1.0
+depend:
+  - qLib
