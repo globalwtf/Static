@@ -1,29 +1,28 @@
-# Zoot
-An essential server management plugin for all servers.
+# Static
+An essential server management plugin for all servers. 
+Was used on HCStatic
 
 # Permissions
-- zoot.admin.broadcast
-- zoot.staff.clearinv
-- zoot.staff.gamemode
-- zoot.admin.heal
-- zoot.admin.hideplayer
-- zoot.staff.more
-- zoot.staff.rename
-- zoot.staff.setslots
-- zoot.staff.setspawn
-- zoot.admin.showplayer
-- zoot.staff.spawn
-- zoot.staff.alts
-- zoot.staff.ban
-- zoot.staff.check
-- zoot.staff.kick
-- zoot.staff.mute
-- zoot.staff.unban
-- zoot.staff.unmute
-- zoot.staff.warn
-- zoot.staff.grant
-- zoot.staff
-- zoot.staff.mutechat
-- zoot.admin.rank
-
-Releasing the code to this because some skid is trying to flex leaking it... (@AgentManny)
+- static.admin.broadcast
+- static.staff.clearinv
+- static.staff.gamemode
+- static.admin.heal
+- Static.admin.hideplayer
+- Static.staff.more
+- Static.staff.rename
+- Static.staff.setslots
+- Static.staff.setspawn
+- Static.admin.showplayer
+- Static.staff.spawn
+- Static.staff.alts
+- Static.staff.ban
+- Static.staff.check
+- Static.staff.kick
+- Static.staff.mute
+- Static.staff.unban
+- Static.staff.unmute
+- Static.staff.warn
+- Static.staff.grant
+- Static.staff
+- Static.staff.mutechat
+- Static.admin.rank
